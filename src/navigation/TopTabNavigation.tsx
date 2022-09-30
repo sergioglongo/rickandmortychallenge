@@ -1,5 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CharacterScreen from '../screens/CharacterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 
@@ -18,7 +19,7 @@ export default function TopTabNavigation() {
         }}
     >
       <Tab.Screen name="Listado" component={HomeScreen} />
-      <Tab.Screen name="Busqueda" component={SearchScreen} />
+      <Tab.Screen name="CharacterScreen" component={CharacterScreen} />
     </Tab.Navigator>
   );
 }

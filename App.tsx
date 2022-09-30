@@ -11,14 +11,12 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <TopTabNavigation />
+        <NavigationStack />
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
 
-});
 
 export default App
