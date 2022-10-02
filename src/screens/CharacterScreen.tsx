@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaInsetsContext, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -18,23 +18,23 @@ const CharacterScreen = ({ navigation, route }: Props) => {
     const [isLoading, setIsLoading] = useState(false)
 
     return (
-        <View style={{flex:1}}>
-                <View style={{ ...styles.navBar , backgroundColor: color}}>
-                        <TouchableOpacity style={{ ...styles.backIcon }}
-                            activeOpacity={0.8}
-                            onPress={() => navigation.pop()}
-                        >
-                            <Icon
-                                name='arrow-back-circle-outline'
-                                color='white'
-                                size={40}
-                            />
-                        </TouchableOpacity>
-                        <Text style={{ ...styles.id }}>
-                            Nº{character.id}
-                        </Text>
-                </View>
-            <View style={{ ...styles.imageSector, backgroundColor: color,  }}>
+        <View style={{ flex: 1 }}>
+            <View style={{ ...styles.navBar, backgroundColor: color }}>
+                <TouchableOpacity style={{ ...styles.backIcon }}
+                    activeOpacity={0.8}
+                    onPress={() => navigation.pop()}
+                >
+                    <Icon
+                        name='arrow-back-circle-outline'
+                        color='white'
+                        size={40}
+                    />
+                </TouchableOpacity>
+                <Text style={{ ...styles.id }}>
+                    Nº{character.id}
+                </Text>
+            </View>
+            <View style={{ ...styles.imageSector, backgroundColor: color, }}>
                 <Text style={{ ...styles.name }}>
                     {character.name}
                 </Text>
@@ -43,18 +43,18 @@ const CharacterScreen = ({ navigation, route }: Props) => {
                     style={styles.characterImage}
                 />
             </View>
-                {isLoading ?
+            {isLoading ?
                 <View style={styles.loading}>
-                    <ActivityIndicator 
-                            color={color}                    
-                            size={50}
+                    <ActivityIndicator
+                        color={color}
+                        size={50}
                     />
                 </View>
                 :
-                <View style={{flex:1}}>
-                    <CharacterDetail character={character}/>
+                <View style={{ flex: 1 }}>
+                    <CharacterDetail character={character} />
                 </View>
-                }
+            }
         </View>
     );
 }
@@ -64,11 +64,20 @@ const styles = StyleSheet.create({
         height: 370,
         zIndex: 999,
         alignItems: 'center',
-        borderBottomRightRadius: 1000,
-        borderBottomLeftRadius: 1000,
+        borderBottomRightRadius: 100,
+        borderBottomLeftRadius: 100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
     },
     navBar: {
-        width:'100%',
+        width: '100%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -76,14 +85,14 @@ const styles = StyleSheet.create({
         alignContent: 'stretch',
     },
     backIcon: {
-        marginLeft:5,
-        marginTop:5
+        marginLeft: 5,
+        marginTop: 5
     },
     id: {
-        marginRight:5,
-        marginTop:5,
-        color:'black',
-        fontSize:30
+        marginRight: 5,
+        marginTop: 5,
+        color: 'black',
+        fontSize: 30
     },
     name: {
         color: 'black',
@@ -91,14 +100,24 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
     },
-    characterImage:{
-        position:'absolute',
+    characterImage: {
+        // position: 'absolute',
         width: 250,
-        height:250,
-        bottom: 0
+        height: 250,
+        // bottom: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+
     },
-    loading:{
-        }
+    loading: {
+    }
 });
 
 export default CharacterScreen

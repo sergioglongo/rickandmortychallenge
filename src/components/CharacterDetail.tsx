@@ -15,36 +15,28 @@ interface Props {
 
 const CharacterDetail = ({ character }: Props) => {
 
-    let episodesAll = getEpisodes().episodesState
     let episodesIds = character.episode.map(episode => {
         return episode.split('/')[5]
     })
-    let episodesToShow = episodesAll.filter(episode => {
-        if (episodesIds.includes(episode.id.toString())) {
-            return episode
-        }
-    })
-    console.log("Episodios", episodesToShow.map(episode => episode.name));
-
-    const renderItem = () => ({ item }) => (
-        <Text>{item}</Text>
-    );
-
+    let episodesToShow = getEpisodes(episodesIds).episodesState
+ 
     return (
         <View style={styles.dataContainer}>
                 <CharacterDetailHeader character={character} />
                 <Text style={styles.title}>Episodios</Text>
                 <ScrollView >
-                    {episodesToShow.map((episode) =>
+                    {episodesToShow.length>1?episodesToShow?.map((episode) =>
                         <EpisodesList episode={episode} />
-                    )}
+                        
+                    ):<EpisodesList episode={episodesToShow} />}
                 </ScrollView>
         </View>
     );
 }
 const styles = StyleSheet.create({
     dataContainer: {
-        flex:1
+        flex:1,
+        marginTop:2
         // backgroundColor:'red', 
         // flexDirection: 'row',
         // alignItems: 'flex-end',

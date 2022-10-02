@@ -16,7 +16,11 @@ export const styles = StyleSheet.create({
         height: '100%',
         opacity: 0.2
     },
-
+    imagebackgoundLogin:{
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+    },
     title: {
         fontSize: 30,
         marginBottom: 10
@@ -31,5 +35,12 @@ export const styles = StyleSheet.create({
     },
     menuTexto: {
         fontSize: 20
+    },
+    buttonFloating:{
+        position:'absolute',
+        backgroundColor:'gray',
+        borderRadius:100,
+        bottom:20,
+        right:20
     }
 });

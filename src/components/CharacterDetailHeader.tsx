@@ -1,18 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {Characters} from '../interfaces/characterInterface'
+
 interface Props {
     character: Characters
 }
 const CharacterDetailHeader = ({ character }: Props) => {
     return (
-        <View>
+        <View style={{flexDirection:'column',flexWrap:'wrap'}}>
             <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Especie:</Text>
                 <Text style={styles.data}> {character.species}</Text>
             </View>
-            <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Estado:</Text>
                 <Text style={styles.data}> {character.status}</Text>
+            <View style={styles.dataContainer}>
             </View>
             <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Tipo:</Text>

@@ -8,7 +8,7 @@ interface Props{
 
 const EpisodesList = ({episode}:Props) => {
     return (
-        <View style={styles.container} key={episode.name}>
+        <View style={styles.container} key={episode.id + episode.name}>
             <Text style={styles.text}>{episode.episode} - {episode?.name}</Text>
         </View>
     );

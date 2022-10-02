@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 interface Props {
-    character: Characters
+    character: Characters,
 }
 
 const windowWith = Dimensions.get('window').width
