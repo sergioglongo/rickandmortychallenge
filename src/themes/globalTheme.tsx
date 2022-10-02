@@ -23,7 +23,9 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop:10,
+        color:'black',
     },
  
     menuContainer: {
@@ -42,5 +44,10 @@ export const styles = StyleSheet.create({
         borderRadius:100,
         bottom:20,
         right:20
+    },
+    buttonFloatingMenu:{
+        position:'absolute',
+        top:12,
+        right:10,
     }
 });
