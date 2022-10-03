@@ -118,7 +118,7 @@ const stylesLocal = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         backgroundColor: 'white',
-        borderColor: '#89C845',
+        borderColor: '#af03b4',
         paddingVertical: 10,
         fontSize: 18,
         opacity: 0.9,
@@ -144,7 +144,7 @@ const stylesLocal = StyleSheet.create({
         fontSize: 35,
         color: '#66e2fd',
         fontWeight: 'bold',
-        marginVertical:20
+        marginTop:35
     },
     buttonLogin: {
         marginHorizontal: 50,

@@ -51,7 +51,8 @@ export const styles = StyleSheet.create({
         right:15,
         borderRadius:50,
         borderWidth:1,
-        
+        borderColor:'gray',
+        backgroundColor: 'white'
     },
     buttonFloatingColumns:{
         position:'absolute',
@@ -59,6 +60,8 @@ export const styles = StyleSheet.create({
         height:44,
         top:10,
         left:15,
+        borderColor:'gray',
+        backgroundColor: 'white',
         borderRadius:50,
         borderWidth:1,
         alignItems:'center',

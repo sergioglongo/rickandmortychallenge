@@ -20,11 +20,8 @@ const LoginScreen = () => {
         Keyboard.dismiss() // Oculta el teclado
         signIn({ mail, password }) //realiza action de logueo
     }
-    
-   
     return (
         <View style={{ flex: 1 }}>
-
             <Image
                 source={require('../assets/login-black9.jpg')}
                 style={styles.imagebackgoundLogin}
@@ -38,8 +35,6 @@ const LoginScreen = () => {
             <View style={stylesLocal.logoContainer}>
                 <Text style={stylesLocal.welcome}>Bienvenido</Text>
             </View>
-          
-
             <View>
                 <Text>Ingrese mail</Text>
                 <TextInput
@@ -97,8 +92,8 @@ const stylesLocal = StyleSheet.create({
     },
     welcome: {
         fontSize: 35,
-        color: '#66e2fd',
-        fontWeight: 'bold'
+        color: '#02B1C8',
+        fontWeight: 'bold',
     },
     buttonLogin: {
         marginHorizontal: 50,

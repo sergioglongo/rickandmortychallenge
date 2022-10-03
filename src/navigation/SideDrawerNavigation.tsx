@@ -4,6 +4,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import { Alert, Image ,StyleSheet, Text , View, useWindowDimensions} from 'react-native'
 import { AuthContext } from '../contexts/AuthContext';
 import NavigationStack from './NavigationStack';
+import SearchScreen from '../screens/SearchScreen';
 
 
 function CustomDrawerContent(props:any) {
@@ -56,6 +57,7 @@ const SideDrawerNavigation = () => {
           drawerContent={props => <CustomDrawerContent {...props} />}
         >
             <Drawer.Screen name="NavigationStack" options={{title:'Personajes'}} component={NavigationStack} />
+            <Drawer.Screen name="SearchScreen" options={{title:'Busqueda'}} component={SearchScreen} />
             <Drawer.Screen name="ProfileScreen" options={{title:'Perfil'}} component={ProfileScreen} />
         </Drawer.Navigator>
     );

@@ -18,16 +18,12 @@ const HomeScreen = (props: Props) => {
     const [columns, setColumns] = useState(1)
     const { logOut, user, errorMessage, removeError } = useContext(AuthContext)
 
-    const hideShow = () => {
-        props.navigation.toggleDrawer()
-    }
     return (
         <View >
             <Image
                 source={require('../assets/RMback.jpg')}
                 style={styles.imagebackgound}
             />
-
             <View style={{ alignItems: 'center' }}>
                 <FlatList
                     key={columns === 2 ?2:1}
@@ -36,10 +32,7 @@ const HomeScreen = (props: Props) => {
                     numColumns={columns}
                     ListHeaderComponent={(
                         <View style={{ alignItems: 'center' }}>
-
-                            <Text style={[styles.title]}>
-                                Personajes
-                            </Text>
+                            <Text style={[styles.title]}>Personajes</Text>
                         </View>
                     )}
                     renderItem={({ item }) =>
@@ -57,20 +50,23 @@ const HomeScreen = (props: Props) => {
                                 size={30}
                                 color='gray'
                             />
-
                         </View>
                     }
                 />
             </View>
             <View style={styles.buttonFloating}>
                 <TouchableOpacity>
-                    <Icon name="search-circle-outline" onPress={() => props.navigation.navigate('SearchScreen')} size={50} color="white" />
+                    <Icon name="search-circle-outline" 
+                    onPress={() => props.navigation.navigate('SearchScreen')} 
+                    size={50} 
+                    color="white" 
+                    />
                 </TouchableOpacity>
             </View>
             <View style={{ ...styles.buttonFloatingMenu }}>
                 <TouchableOpacity>
                     <Icon name="menu-outline"
-                        onPress={() => (hideShow())}
+                        onPress={() => (props.navigation.toggleDrawer())}
                         size={38} color="black" />
                 </TouchableOpacity>
             </View>
