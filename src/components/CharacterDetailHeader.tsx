@@ -11,18 +11,20 @@ const CharacterDetailHeader = ({ character }: Props) => {
             <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Especie:</Text>
                 <Text style={styles.data}> {character.species}</Text>
-            </View>
+                <View style={{marginHorizontal:15}}/>
                 <Text style={styles.subtitles}>Estado:</Text>
                 <Text style={styles.data}> {character.status}</Text>
+            </View>
             <View style={styles.dataContainer}>
             </View>
             <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Tipo:</Text>
-                <Text style={styles.data}> {character.type ? character.type : 'desconocido'}</Text>
+                <Text style={styles.data}> {character.type ? character.type : 'unknown'}</Text>
+                <View style={{marginHorizontal:5}}/>
+                <Text style={styles.subtitles}>Genero:</Text>
+                <Text style={styles.data}> {character.gender ? character.gender : 'unknown'}</Text>
             </View>
             <View style={styles.dataContainer}>
-                <Text style={styles.subtitles}>Genero:</Text>
-                <Text style={styles.data}> {character.gender ? character.gender : 'desconocido'}</Text>
             </View>
             <View style={styles.dataContainer}>
                 <Text style={styles.subtitles}>Origen:</Text>
@@ -41,11 +43,13 @@ const styles = StyleSheet.create({
     dataContainer: {
         // backgroundColor:'red', 
         flexDirection: 'row',
+        flexWrap:'wrap',
         alignItems: 'flex-end',
+        marginVertical:2
     },
     title:{
         fontSize:20,
-        color:'black'
+        color:'black',
     }
     ,
     subtitles: {

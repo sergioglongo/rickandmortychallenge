@@ -5,19 +5,19 @@ import { FadeInImage } from '../components/FadeImage';
 import { styles } from '../themes/cardTheme'
 import ImageColors from 'react-native-image-colors';
 import { useNavigation } from '@react-navigation/native';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 
-interface Props {
+interface Props extends DrawerScreenProps<any, any>{
     character: Characters,
 }
 
 const windowWith = Dimensions.get('window').width
 
-const CharacterCard = ({ character }: Props) => {
+const CharacterCard = ({ character , navigation}: Props) => {
 
     const [bgColor, setBgColor] = useState('gray')
     const isMounted = useRef(true)
-    const navigation = useNavigation()
     useEffect(() => {
         {
             ImageColors.getColors(character.image, { fallback: 'grey' })
@@ -25,7 +25,7 @@ const CharacterCard = ({ character }: Props) => {
                 if (!isMounted.current) return //evita que calcule el color si no esta montado
                 colors.platform === 'android'
                     ? setBgColor(colors.dominant || 'gray')
-                    : setBgColor(colors.primary || 'white')
+                    : setBgColor('white')
             })
         }
         return () => {

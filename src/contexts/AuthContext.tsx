@@ -9,10 +9,12 @@ import { authReducer, AuthState } from './authReducer';
 type AuthContextProps = {
     errorMessage: string;
     user: UserData | null;
+    userId: string | null;
     status: 'checking' | 'authenticated' | 'not-authenticated';
     signIn: ( loginData: LoginData ) => void;
     logOut: () => void;
     removeError: () => void;
+    userUpdate: (userId:string | null) => void;
 }
 
 const authInicialState: AuthState = {
@@ -57,7 +59,6 @@ export const AuthProvider = ({ children }: any)=> {
         });
     }
 
-
     const signIn = async({ mail, password }: LoginData ) => {
         
         try {
@@ -81,17 +82,28 @@ export const AuthProvider = ({ children }: any)=> {
             })
         }
     };
-    
  
     const logOut = async() => {
         await AsyncStorage.removeItem('userId');
         dispatch({ type: 'logout' });
         console.log("Deslogueado");
-        
     };
 
     const removeError = () => {
         dispatch({ type: 'removeError' });
+    };
+    const userUpdate = async( userId : string | null) => {
+        try {
+            const userData = await AuthAPI.get<UserAPI>(`/user/${userId}`)
+            dispatch({ 
+                type: 'userUpdate',
+                payload: {
+                    user: userData.data.userData
+                }
+            });
+        } catch (error:any) {
+            console.log(error);
+        }
     };
 
     return (
@@ -100,6 +112,7 @@ export const AuthProvider = ({ children }: any)=> {
             signIn,
             logOut,
             removeError,
+            userUpdate
         }}>
             { children }
         </AuthContext.Provider>

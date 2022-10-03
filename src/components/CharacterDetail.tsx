@@ -25,10 +25,9 @@ const CharacterDetail = ({ character }: Props) => {
                 <CharacterDetailHeader character={character} />
                 <Text style={styles.title}>Episodios</Text>
                 <ScrollView >
-                    {episodesToShow.length>1?episodesToShow?.map((episode) =>
-                        <EpisodesList episode={episode} />
-                        
-                    ):<EpisodesList episode={episodesToShow} />}
+                    {episodesToShow?.map((episode,index) =>
+                        <EpisodesList episode={episode} index={index}/>
+                                         )}
                 </ScrollView>
         </View>
     );
@@ -36,14 +35,19 @@ const CharacterDetail = ({ character }: Props) => {
 const styles = StyleSheet.create({
     dataContainer: {
         flex:1,
-        marginTop:2
+        marginTop:2,
+        paddingHorizontal:10,
+        paddingVertical:5,
         // backgroundColor:'red', 
         // flexDirection: 'row',
         // alignItems: 'flex-end',
     },
     title: {
-        fontSize: 20,
-        color: 'black'
+        fontSize: 24,
+        color: 'black',
+        marginBottom:4,
+        alignSelf:'center',
+        marginRight:10
     }
     ,
     subtitles: {

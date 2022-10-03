@@ -12,8 +12,8 @@ import { LoadingScreen } from '../screens/LoadingScreen';
 export type RootStackParams = {
   LoginScreen: undefined,
   HomeScreen: undefined,
-  CharacterScreen: { character: Characters, color: string },
   SearchScreen: undefined,
+  CharacterScreen: { character: Characters, color: string },
 }
 //incluyo el type de Screens para avisar a las Screens que paramentros deben recibir
 const Stack = createStackNavigator<RootStackParams>();

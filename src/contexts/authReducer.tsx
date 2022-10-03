@@ -13,6 +13,7 @@ type AuthAction =
     | { type: 'removeError' }
     | { type: 'notAuthenticated' }
     | { type: 'logout' }
+    | { type: 'userUpdate', payload: {user: UserData }}
 
 
 export const authReducer = (state: AuthState, action: AuthAction): AuthState => {
@@ -40,7 +41,11 @@ export const authReducer = (state: AuthState, action: AuthAction): AuthState => 
                 userId: action.payload.userId,
                 user: action.payload.user
             }
-
+        case 'userUpdate':
+                return {
+                    ...state,
+                    user: action.payload.user
+            }
         case 'logout':
         case 'notAuthenticated':
             return {

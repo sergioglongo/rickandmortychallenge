@@ -11,8 +11,11 @@ export const getEpisodes = (episodesIds:string[]) => {
     arrayToCommas = arrayToCommas.slice(0,-1)
     
     const loadEpisodes = async() => {
-        const episodes = await axios.get<Episode[]>(`https://rickandmortyapi.com/api/episode/${arrayToCommas}`)
+        const episodes = await axios.get(`https://rickandmortyapi.com/api/episode/${arrayToCommas}`)
+        if(episodes.data[0])    
             setEpisodesState(episodes.data)
+        else
+            setEpisodesState([episodes.data])
         
     }
     

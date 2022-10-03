@@ -1,23 +1,26 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, Image, View, Button, Text, FlatList, ActivityIndicator } from 'react-native';
+import { Image, View, Text, FlatList, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useCharactersPaginated } from '../hooks/useCharactersPaginated';
 import { styles } from '../themes/globalTheme';
-import { Characters } from "../interfaces/characterInterface"
 import CharacterCard from '../components/CharacterCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import { RootStackParams } from '../navigation/NavigationStack'
 import { AuthContext } from '../contexts/AuthContext';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import CharacterCardLarge from '../components/CharacterCardLarge';
 
 
-const HomeScreen = () => {
+interface Props extends DrawerScreenProps<any, any> { }
+
+const HomeScreen = (props: Props) => {
 
     const { characters, isLoading, loadCharacters } = useCharactersPaginated()
-    const [columns, setColumns] = useState(2)
-    const navigation = useNavigation()
-    const { signIn, logOut, user, errorMessage, removeError } = useContext(AuthContext)
+    const [columns, setColumns] = useState(1)
+    const { logOut, user, errorMessage, removeError } = useContext(AuthContext)
 
+    const hideShow = () => {
+        props.navigation.toggleDrawer()
+    }
     return (
         <View >
             <Image
@@ -27,6 +30,7 @@ const HomeScreen = () => {
 
             <View style={{ alignItems: 'center' }}>
                 <FlatList
+                    key={columns === 2 ?2:1}
                     data={characters}
                     keyExtractor={(item) => `row-${item.id}`}
                     numColumns={columns}
@@ -34,12 +38,13 @@ const HomeScreen = () => {
                         <View style={{ alignItems: 'center' }}>
 
                             <Text style={[styles.title]}>
-                                Lista de Personajes
+                                Personajes
                             </Text>
                         </View>
                     )}
                     renderItem={({ item }) =>
-                        <CharacterCard character={item} />
+                        columns === 2 ? <CharacterCard character={item} {...props} />
+                            : <CharacterCardLarge character={item} {...props} />
                     }
                     //cuando este cerca del final cargo los siguientes
                     onEndReached={loadCharacters}
@@ -59,14 +64,19 @@ const HomeScreen = () => {
             </View>
             <View style={styles.buttonFloating}>
                 <TouchableOpacity>
-                    <Icon name="search-circle-outline" onPress={() => navigation.navigate('SearchScreen')} size={50} color="white" />
+                    <Icon name="search-circle-outline" onPress={() => props.navigation.navigate('SearchScreen')} size={50} color="white" />
                 </TouchableOpacity>
             </View>
-            <View style={{...styles.buttonFloatingMenu}}>
+            <View style={{ ...styles.buttonFloatingMenu }}>
                 <TouchableOpacity>
-                    <Icon name="menu-outline" 
-                    onPress={() => (logOut())} 
-                    size={40} color="gray" />
+                    <Icon name="menu-outline"
+                        onPress={() => (hideShow())}
+                        size={38} color="black" />
+                </TouchableOpacity>
+            </View>
+            <View style={{ ...styles.buttonFloatingColumns }}>
+                <TouchableOpacity onPress={()=>setColumns(columns===1?2:1)}>
+                    <Text style={styles.buttonFloatingColumnsText}>Cols:{columns}</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -3,13 +3,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import { Episode } from '../interfaces/episodeInterface';
 
 interface Props{
-    episode: Episode
+    episode: Episode,
+    index:number
 }
 
-const EpisodesList = ({episode}:Props) => {
+const EpisodesList = ({episode,index}:Props) => {
     return (
-        <View style={styles.container} key={episode.id + episode.name}>
-            <Text style={styles.text}>{episode.episode} - {episode?.name}</Text>
+        <View style={styles.container} >
+            <Text style={styles.text} key={index}>{episode.episode} - {episode?.name}</Text>
         </View>
     );
 }

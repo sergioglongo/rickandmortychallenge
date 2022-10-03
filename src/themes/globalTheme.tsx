@@ -47,7 +47,27 @@ export const styles = StyleSheet.create({
     },
     buttonFloatingMenu:{
         position:'absolute',
-        top:12,
-        right:10,
+        top:10,
+        right:15,
+        borderRadius:50,
+        borderWidth:1,
+        
+    },
+    buttonFloatingColumns:{
+        position:'absolute',
+        width:85,
+        height:44,
+        top:10,
+        left:15,
+        borderRadius:50,
+        borderWidth:1,
+        alignItems:'center',
+        justifyContent:'center'
+        
+    },
+    buttonFloatingColumnsText:{
+        fontSize:20,
+        fontWeight:'bold',
+        color:'black'
     }
 });
