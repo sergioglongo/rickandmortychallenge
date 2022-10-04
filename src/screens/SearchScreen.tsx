@@ -11,6 +11,7 @@ import CharacterCardLarge from '../components/CharacterCardLarge';
 import { getCharacterSearch } from '../api/getCharacterSearch';
 import { Dropdown, MultiSelect } from 'react-native-element-dropdown'
 import ListEmpty from '../components/ListEmpty';
+import { useDebounce } from '../hooks/useDebounce';
 
 const screenWidth = Dimensions.get('window').width
 
@@ -18,24 +19,24 @@ interface Props extends DrawerScreenProps<any, any> { }
 
 const HomeScreen = (props: Props) => {
 
-
     const [searchState, SetSearchState] = useState('')
-
     const [status, setStatus] = useState(null);
     const { characters, loadCharacters } = getCharacterSearch(searchState,status)
     const [columns, setColumns] = useState(1)
-    const { logOut, user, errorMessage, removeError } = useContext(AuthContext)
-    const data = [
+    const debounceValue = useDebounce(searchState,1000)// debounce se ejecuta al cambiar searchState por ser un estado local
+
+    useEffect(()=>{
+        loadCharacters() //recarga personajes en base a input y filtros
+    },[debounceValue])// cuando el texto en espera cambie ejecuta el efecto
+
+    const statusList = [
         {label: 'all', value: 'all'},
         {label: 'alive', value: 'alive'},
         {label: 'dead', value: 'dead'},
         {label: 'unknown', value: 'unknown'},
-    ];
+    ];// datos a deplegar en combo de estado
 
-    const onChange = (text: string) => {
-        SetSearchState(text)
-
-    }
+ 
     const searchAction = () => {
         loadCharacters()
         Keyboard.dismiss() // Oculta el teclado
@@ -58,18 +59,18 @@ const HomeScreen = (props: Props) => {
     
 
     return (
-        <View style={{flex:1}}>
+        <View style={{flex:1, }}>
             <Image
                 source={require('../assets/RMback.jpg')}
                 style={styles.imagebackgound}
             />
-            <View style={{ ...stylesLocal.input, width: screenWidth - 20, }}>
+            <View style={{ ...stylesLocal.input, width: screenWidth * 0.6,}}>
                 <TextInput
-                    // style={{ ...stylesLocal.textInput }} 
+                    style={{ width:100 }} 
                     placeholder='buscar personaje'
                     autoCapitalize='none'
                     autoCorrect={false}
-                    onChangeText={onChange}
+                    onChangeText={SetSearchState}
                 />
                 <View style={{ flex: 1 }}></View>
                 <TouchableOpacity >
@@ -130,7 +131,7 @@ const HomeScreen = (props: Props) => {
                     <Dropdown
                         style={stylesLocal.dropdown}
                         containerStyle={stylesLocal.shadow}
-                        data={data}
+                        data={statusList}
                         searchPlaceholder="state"
                         labelField="label"
                         valueField="value"
