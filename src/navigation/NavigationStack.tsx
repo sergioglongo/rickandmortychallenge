@@ -39,9 +39,9 @@ function NavigationStack() {
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
           ) :
           (<>
+            <Stack.Screen name="SearchScreen" component={SearchScreen} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
-            <Stack.Screen name="SearchScreen" component={SearchScreen} />
           </>)}
     </Stack.Navigator>
   );

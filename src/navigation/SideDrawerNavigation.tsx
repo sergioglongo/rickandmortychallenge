@@ -57,7 +57,6 @@ const SideDrawerNavigation = () => {
           drawerContent={props => <CustomDrawerContent {...props} />}
         >
             <Drawer.Screen name="NavigationStack" options={{title:'Personajes'}} component={NavigationStack} />
-            <Drawer.Screen name="SearchScreen" options={{title:'Busqueda'}} component={SearchScreen} />
             <Drawer.Screen name="ProfileScreen" options={{title:'Perfil'}} component={ProfileScreen} />
         </Drawer.Navigator>
     );

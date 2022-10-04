@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Image, View, Text, FlatList, Keyboard, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useCharactersPaginated } from '../hooks/useCharactersPaginated';
@@ -9,6 +9,8 @@ import { AuthContext } from '../contexts/AuthContext';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import CharacterCardLarge from '../components/CharacterCardLarge';
 import { getCharacterSearch } from '../api/getCharacterSearch';
+import { Dropdown, MultiSelect } from 'react-native-element-dropdown'
+import ListEmpty from '../components/ListEmpty';
 
 const screenWidth = Dimensions.get('window').width
 
@@ -19,9 +21,16 @@ const HomeScreen = (props: Props) => {
 
     const [searchState, SetSearchState] = useState('')
 
-    const { characters, loadCharacters } = getCharacterSearch(searchState)
+    const [status, setStatus] = useState(null);
+    const { characters, loadCharacters } = getCharacterSearch(searchState,status)
     const [columns, setColumns] = useState(1)
     const { logOut, user, errorMessage, removeError } = useContext(AuthContext)
+    const data = [
+        {label: 'all', value: 'all'},
+        {label: 'alive', value: 'alive'},
+        {label: 'dead', value: 'dead'},
+        {label: 'unknown', value: 'unknown'},
+    ];
 
     const onChange = (text: string) => {
         SetSearchState(text)
@@ -30,16 +39,31 @@ const HomeScreen = (props: Props) => {
     const searchAction = () => {
         loadCharacters()
         Keyboard.dismiss() // Oculta el teclado
-
     }
+    const _renderItem = (item:any) => {
+        return (
+            <View style={stylesLocal.item}>
+                <Text style={stylesLocal.textItem}>{item.label}</Text>
+            </View>
+        );
+    }
+    const onChangeStatus = (item:any) => {
+        setStatus(item.value);
+    }
+    
+    useEffect(() => {
+        loadCharacters()
+        
+    }, [status])
+    
 
     return (
-        <View >
+        <View style={{flex:1}}>
             <Image
                 source={require('../assets/RMback.jpg')}
                 style={styles.imagebackgound}
             />
-            <View style={{ ...stylesLocal.input, width: screenWidth -20 , }}>
+            <View style={{ ...stylesLocal.input, width: screenWidth - 20, }}>
                 <TextInput
                     // style={{ ...stylesLocal.textInput }} 
                     placeholder='buscar personaje'
@@ -60,15 +84,17 @@ const HomeScreen = (props: Props) => {
             </View>
             <View style={{ alignItems: 'center' }}>
                 <FlatList
+                    initialScrollIndex={0}
                     key={columns === 2 ? 2 : 1}
                     data={characters}
-                    keyExtractor={(item) => `row-${item.id}`}
+                    keyExtractor={(item,index) => `row-${index}`}
                     numColumns={columns}
                     ListHeaderComponent={(
-                        <View style={{ alignItems: 'center' }}>
-                            <Text style={[styles.title]}>Personajes</Text>
+                        <View style={{ alignItems: 'center', marginTop: 125 }}>
+
                         </View>
                     )}
+                    ListEmptyComponent={<ListEmpty/>}
                     renderItem={({ item }) =>
                         columns === 2 ? <CharacterCard character={item} {...props} />
                             : <CharacterCardLarge character={item} {...props} />
@@ -99,6 +125,20 @@ const HomeScreen = (props: Props) => {
                 <TouchableOpacity onPress={() => setColumns(columns === 1 ? 2 : 1)}>
                     <Text style={styles.buttonFloatingColumnsText}>Cols:{columns}</Text>
                 </TouchableOpacity>
+            </View>
+            <View style={{ ...styles.buttonFloatingColumns, width:120,left: 110 }}>
+                    <Dropdown
+                        style={stylesLocal.dropdown}
+                        containerStyle={stylesLocal.shadow}
+                        data={data}
+                        searchPlaceholder="state"
+                        labelField="label"
+                        valueField="value"
+                        placeholder="all"
+                        value={status}
+                        onChange={onChangeStatus}
+                        renderItem={item => _renderItem(item)}
+                    />
             </View>
         </View>
     );
@@ -142,7 +182,7 @@ const stylesLocal = StyleSheet.create({
         borderRadius: 30,
         height: 40,
         top: 70,
-        alignSelf:'center',
+        alignSelf: 'center',
         flexDirection: 'row',
         paddingHorizontal: 20,
         alignContent: 'space-between',
@@ -155,6 +195,36 @@ const stylesLocal = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
+    },
+    dropdown: {
+        backgroundColor: 'white',
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+        marginTop: 1,
+        width:90,
+    },
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+        elevation: 2,
+    },
+    item: {
+        paddingVertical: 3,
+        paddingHorizontal: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        
+    },
+    textItem: {
+        flex: 1,
+        fontSize: 16,
+        color:'black',
     },
 })
 

@@ -61,12 +61,11 @@ export const styles = StyleSheet.create({
         top:10,
         left:15,
         borderColor:'gray',
-        backgroundColor: 'white',
         borderRadius:50,
         borderWidth:1,
         alignItems:'center',
-        justifyContent:'center'
-        
+        justifyContent:'center',
+        backgroundColor:'white'
     },
     buttonFloatingColumnsText:{
         fontSize:20,

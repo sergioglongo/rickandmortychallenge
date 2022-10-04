@@ -19,25 +19,32 @@ const CharacterDetail = ({ character }: Props) => {
         return episode.split('/')[5]
     })
     let episodesToShow = getEpisodes(episodesIds).episodesState
- 
+
     return (
         <View style={styles.dataContainer}>
-                <CharacterDetailHeader character={character} />
-                <Text style={styles.title}>Episodios</Text>
-                <ScrollView >
-                    {episodesToShow?.map((episode,index) =>
-                        <EpisodesList episode={episode} index={index}/>
-                                         )}
-                </ScrollView>
+            <CharacterDetailHeader character={character} />
+            <Text style={styles.title}>Episodios</Text>
+            <FlatList
+                data={episodesToShow}
+                keyExtractor={(character) => character.id.toString()}
+                renderItem={({item}) => <Text style={styles.text}>{item.episode} - {item.name}</Text>}
+            />
+            {/* <ScrollView >
+                {episodesToShow?.map((episode, index) =>
+                    <View style={styles.container} >
+                        <Text style={styles.text} key={ index.toString()}>{episode.episode} - {episode?.name}</Text>
+                    </View>
+                )}
+            </ScrollView> */}
         </View>
     );
 }
 const styles = StyleSheet.create({
     dataContainer: {
-        flex:1,
-        marginTop:2,
-        paddingHorizontal:10,
-        paddingVertical:5,
+        flex: 1,
+        marginTop: 2,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         // backgroundColor:'red', 
         // flexDirection: 'row',
         // alignItems: 'flex-end',
@@ -45,9 +52,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         color: 'black',
-        marginBottom:4,
-        alignSelf:'center',
-        marginRight:10
+        marginBottom: 4,
+        alignSelf: 'center',
+        marginRight: 10
     }
     ,
     subtitles: {
@@ -58,7 +65,18 @@ const styles = StyleSheet.create({
         color: 'gray',
         fontSize: 18
 
+    },
+    container:{
+        marginBottom:1,
+        backgroundColor:'white',
+        marginVertical:2,
+        borderColor:'gray',
+        borderWidth:1,
+        marginHorizontal:5
+    },
+    text:{
+        fontSize:16,
+        color:'black'
     }
-
 })
 export default CharacterDetail
