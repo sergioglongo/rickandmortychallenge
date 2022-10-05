@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Button, Text, View, Image, Alert, Keyboard } from 'react-native';
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import authAPI from '../api/authAPI';
 import { AuthContext } from '../contexts/AuthContext';
-import { LoginResponse } from '../interfaces/userInterfaces';
 import { styles } from '../themes/globalTheme';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DrawerScreenProps } from '@react-navigation/drawer';
@@ -43,6 +42,13 @@ const ProfileScreen = ({ navigation }: Props) => {
         }
     }
 
+    useEffect(()=>{
+        if(!userId)
+            navigation.navigate('LoginScreen')
+    },[userId])
+
+
+    
     return (
         <View style={{ flex: 1 }}>
 

@@ -17,6 +17,8 @@ type AuthAction =
 
 
 export const authReducer = (state: AuthState, action: AuthAction): AuthState => {
+    console.log("llega a reducer", action.type,action?.payload);
+    
     switch (action.type) {
         case 'addError':
             return {

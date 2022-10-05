@@ -7,12 +7,14 @@ import CharacterScreen from '../screens/CharacterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import { AuthContext } from '../contexts/AuthContext';
 import { LoadingScreen } from '../screens/LoadingScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 // Argumentos que va a recibir cada Screen
 export type RootStackParams = {
   LoginScreen: undefined,
   SearchScreen: undefined,
   CharacterScreen: { character: Characters, color: string },
+  ProfileScreen: undefined,
 }
 //incluyo el type de Screens para avisar a las Screens que paramentros deben recibir
 const Stack = createStackNavigator<RootStackParams>();
@@ -43,6 +45,7 @@ function NavigationStack() {
           (<>
             <Stack.Screen name="SearchScreen" component={SearchScreen} />
             <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           </>)}
     </Stack.Navigator>
   );

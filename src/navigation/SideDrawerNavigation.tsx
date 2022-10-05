@@ -49,11 +49,14 @@ const SideDrawerNavigation = () => {
     
     return (
         <Drawer.Navigator 
+        
         screenOptions={{
             drawerType: width >= 768 ? 'permanent' : 'front',
             headerShown:false,
             drawerPosition:'right',
+            gestureHandlerProps:{enabled:false}
         }}
+        
           drawerContent={props => <CustomDrawerContent {...props} />}
         >
             <Drawer.Screen name="NavigationStack" options={{title:'Personajes'}} component={NavigationStack} />

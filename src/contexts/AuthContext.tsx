@@ -60,11 +60,13 @@ export const AuthProvider = ({ children }: any)=> {
     }
 
     const signIn = async({ mail, password }: LoginData ) => {
+        console.log("llega a signIn",mail,password);
         
         try {
-         
             const { data } = await AuthAPI.post<LoginResponse>('/login', { mail, password });
             const userData = await AuthAPI.get<UserAPI>(`/user/${data.userId}`)
+            console.log("respuesta de api:",data);
+            
             dispatch({ 
                 type: 'signIn',
                 payload: {
@@ -72,13 +74,13 @@ export const AuthProvider = ({ children }: any)=> {
                     user: userData.data.userData
                 }
             });
-
             await AsyncStorage.setItem('userId', data.userId );
-
         } catch (error:any) {
+           console.log("Mensaje capturado",error.response.data);
+           
             dispatch({ 
                 type: 'addError', 
-                payload: error.response.data.msg || 'Información incorrecta'
+                payload: error.response.data.message || 'Información incorrecta'
             })
         }
     };

@@ -1,15 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState,  useEffect } from 'react';
 import { Image, View, Text, FlatList, Keyboard, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
-import { useCharactersPaginated } from '../hooks/useCharactersPaginated';
 import { styles } from '../themes/globalTheme';
 import CharacterCard from '../components/CharacterCard';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { AuthContext } from '../contexts/AuthContext';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import CharacterCardLarge from '../components/CharacterCardLarge';
 import { getCharacterSearch } from '../api/getCharacterSearch';
-import { Dropdown, MultiSelect } from 'react-native-element-dropdown'
+import { Dropdown } from 'react-native-element-dropdown'
 import ListEmpty from '../components/ListEmpty';
 import { useDebounce } from '../hooks/useDebounce';
 

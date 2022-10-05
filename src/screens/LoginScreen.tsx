@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Image, Text, Keyboard, View, StyleSheet, Button, KeyboardAvoidingView } from "react-native";
+import { Image, Text, Keyboard, View, StyleSheet, Button, Alert } from "react-native";
 import { styles } from "../themes/globalTheme";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
@@ -12,12 +12,27 @@ const LoginScreen = () => {
 
     const navigation = useNavigation()
 
-    const { signIn, logOut, errorMessage,removeError} = useContext(AuthContext)
+    const { signIn, errorMessage, removeError } = useContext(AuthContext)
     const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
-    
+
+    useEffect(() => {
+        if(errorMessage.length===0) return
+        Alert.alert(
+            "Login Incorrecto",
+            errorMessage,
+            [
+                { text: "Aceptar",
+                onPress:removeError
+            }
+            ]
+        )
+    }, [errorMessage])
+
     let loginTry = async () => {
         Keyboard.dismiss() // Oculta el teclado
+        console.log("Envio datos a SignIn",mail, password);
+        
         signIn({ mail, password }) //realiza action de logueo
     }
     return (
@@ -61,7 +76,7 @@ const LoginScreen = () => {
                     color='#02B1C8'
                 />
             </View>
- 
+
         </View>
     );
 }
