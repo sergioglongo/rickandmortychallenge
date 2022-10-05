@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 
-export const colores = {
-    primary: '#5856D6',
-    secondary: 'gray'
+export const colors = {
+    primary: 'black',
+    secondary: 'gray',
+    button:'#02B1C8',
+    neutral:'white'
 }
 
 export const styles = StyleSheet.create({
@@ -25,7 +27,7 @@ export const styles = StyleSheet.create({
         fontSize: 30,
         marginBottom: 10,
         marginTop:10,
-        color:'black',
+        color:colors.primary,
     },
  
     menuContainer: {
@@ -40,7 +42,7 @@ export const styles = StyleSheet.create({
     },
     buttonFloating:{
         position:'absolute',
-        backgroundColor:'gray',
+        backgroundColor:colors.secondary,
         borderRadius:100,
         bottom:20,
         right:20
@@ -51,25 +53,7 @@ export const styles = StyleSheet.create({
         right:15,
         borderRadius:50,
         borderWidth:1,
-        borderColor:'gray',
-        backgroundColor: 'white'
-    },
-    buttonFloatingColumns:{
-        position:'absolute',
-        width:85,
-        height:44,
-        top:10,
-        left:15,
-        borderColor:'gray',
-        borderRadius:50,
-        borderWidth:1,
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'white'
-    },
-    buttonFloatingColumnsText:{
-        fontSize:20,
-        fontWeight:'bold',
-        color:'black'
+        borderColor:colors.secondary,
+        backgroundColor: colors.neutral
     }
 });

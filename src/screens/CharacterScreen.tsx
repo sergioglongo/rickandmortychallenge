@@ -1,10 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaInsetsContext, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParams } from '../navigation/NavigationStack';
-import { colores } from '../themes/globalTheme';
+import { colors } from '../themes/globalTheme';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { FadeInImage } from '../components/FadeImage';
 import CharacterDetail from '../components/CharacterDetail';
@@ -26,7 +25,7 @@ const CharacterScreen = ({ navigation, route }: Props) => {
                 >
                     <Icon
                         name='arrow-back-circle-outline'
-                        color='white'
+                        color={colors.neutral}
                         size={40}
                     />
                 </TouchableOpacity>
@@ -91,11 +90,11 @@ const styles = StyleSheet.create({
     id: {
         marginRight: 5,
         marginTop: 5,
-        color: 'black',
+        color: colors.primary,
         fontSize: 30
     },
     name: {
-        color: 'black',
+        color: colors.primary,
         fontSize: 40,
         alignSelf: 'center',
         textAlign: 'center',

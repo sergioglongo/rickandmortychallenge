@@ -5,6 +5,7 @@ import { Alert, Image ,StyleSheet, Text , View, useWindowDimensions} from 'react
 import { AuthContext } from '../contexts/AuthContext';
 import NavigationStack from './NavigationStack';
 import SearchScreen from '../screens/SearchScreen';
+import AboutScreen from '../screens/About';
 
 
 function CustomDrawerContent(props:any) {
@@ -61,6 +62,7 @@ const SideDrawerNavigation = () => {
         >
             <Drawer.Screen name="NavigationStack" options={{title:'Personajes'}} component={NavigationStack} />
             <Drawer.Screen name="ProfileScreen" options={{title:'Perfil'}} component={ProfileScreen} />
+            <Drawer.Screen name="AboutScreen" options={{title:'Acerca de...'}} component={AboutScreen} />
         </Drawer.Navigator>
     );
 }

@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState , useMemo} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
+import React, { useEffect, useRef, useState} from 'react';
+import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import { Characters } from '../interfaces/characterInterface';
-import { FadeInImage } from './FadeImage';
 import { styles } from '../themes/cardLargeTheme'
-import ImageColors from 'react-native-image-colors';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import FastImage from 'react-native-fast-image';
-
+import useBackgroundColor from '../hooks/useBackgroundColor';
 
 interface Props extends DrawerScreenProps<any, any> {
     character: Characters,
-}
+}//toma propiedades de Drawer y de Characters
 
 const windowWith = Dimensions.get('window').width
 
@@ -18,16 +16,10 @@ const CharacterCardLarge = ({ character, navigation }: Props) => {
 
     const [bgColor, setBgColor] = useState('gray')
     const isMounted = useRef(true)
+    
+    // efecto para precargar fondo de card estimando el color predominante en la imagen
     useEffect(() => {
-        {
-            ImageColors.getColors(character.image, { fallback: 'grey' })
-                .then(colors => {
-                    if (!isMounted.current) return //evita que calcule el color si no esta montado
-                    colors.platform === 'android'
-                        ? setBgColor(colors.dominant || 'gray')
-                        : setBgColor('white')
-                })
-        }
+        useBackgroundColor(character,isMounted.current,setBgColor)
         return () => {
             isMounted.current = false
         }
@@ -35,18 +27,9 @@ const CharacterCardLarge = ({ character, navigation }: Props) => {
 
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={() =>
-            navigation.navigate(
-                'CharacterScreen',
-                {
-                    character: character,
-                    color: bgColor
-                })
+            navigation.navigate('CharacterScreen',{character: character,color: bgColor})
         }>
             <View style={{ ...styles.cardContainerLarge, backgroundColor: bgColor, width: windowWith * 0.95, height: windowWith * 0.48 }}>
-                {/* <FadeInImage
-                    uri={character.image}
-                    style={styles.characterImage}
-                /> */}
                 <FastImage
                     style={styles.characterImage}
                     source={{

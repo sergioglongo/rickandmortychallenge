@@ -8,6 +8,7 @@ import LoginScreen from '../screens/LoginScreen';
 import { AuthContext } from '../contexts/AuthContext';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import { colors } from '../themes/globalTheme';
 
 // Argumentos que va a recibir cada Screen
 export type RootStackParams = {
@@ -34,7 +35,7 @@ function NavigationStack() {
         headerShown: false,
         title: 'Ricky & Morty',
         cardStyle: {
-          backgroundColor: 'white'
+          backgroundColor: colors.neutral
         }
       }}>
       {

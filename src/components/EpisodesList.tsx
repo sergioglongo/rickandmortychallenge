@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { Episode } from '../interfaces/episodeInterface';
+import { colors } from '../themes/globalTheme';
 
 interface Props{
     episode: Episode,
@@ -19,14 +20,14 @@ export default EpisodesList
 const styles = StyleSheet.create({
     container:{
         marginBottom:1,
-        backgroundColor:'white',
+        backgroundColor:colors.neutral,
         marginVertical:2,
-        borderColor:'gray',
+        borderColor:colors.secondary,
         borderWidth:1,
         marginHorizontal:5
     },
     text:{
         fontSize:16,
-        color:'black'
+        color:colors.primary
     }
 });

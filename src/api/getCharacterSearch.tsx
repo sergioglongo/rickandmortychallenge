@@ -13,8 +13,6 @@ export const getCharacterSearch = (name: string, status: string | null, gender: 
             status = ''
         if (gender === 'all' || gender === null)
             gender = ''
-        console.log("llega",status,gender);
-        console.log("Ruta",`https://rickandmortyapi.com/api/character/?name=${name}&status=${status}&gender=${gender}`);
         
         let totalPages: number = 0
         let charactersAll: Characters[] = []
@@ -27,7 +25,6 @@ export const getCharacterSearch = (name: string, status: string | null, gender: 
                         for (let i = 2; i <= totalPages; i++) {
                             let charactersNextPage = await axios.get<CharactersPaginatedResponse>(`https://rickandmortyapi.com/api/character/?page=${i}&name=${name}`)
                             charactersAll = charactersAll.concat(charactersNextPage.data.results);
-                            console.log("en for:", charactersAll.length)
                         }
                     }
                     if (charactersAll)

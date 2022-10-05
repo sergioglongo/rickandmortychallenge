@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActivityIndicator, View ,Image} from 'react-native'
-import { styles } from '../themes/globalTheme'
+import { colors, styles } from '../themes/globalTheme'
 
 export const LoadingScreen = () => {
     return (
@@ -15,7 +15,7 @@ export const LoadingScreen = () => {
             />
             <ActivityIndicator 
                 size={ 50 }
-                color="black"
+                color={colors.primary}
             />
         </View>
     )

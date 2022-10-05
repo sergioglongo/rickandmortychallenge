@@ -3,7 +3,7 @@ import { StyleSheet, Button, Text, View, Image, Alert, Keyboard } from 'react-na
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import authAPI from '../api/authAPI';
 import { AuthContext } from '../contexts/AuthContext';
-import { styles } from '../themes/globalTheme';
+import { colors, styles } from '../themes/globalTheme';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DrawerScreenProps } from '@react-navigation/drawer';
 
@@ -22,11 +22,10 @@ const ProfileScreen = ({ navigation }: Props) => {
         Alert.alert(
             "Actualización Exitosa",
             "Los datos fueron actualizados correctamente",
-            [
-                { text: "Aceptar" }
-            ]
+            [{ text: "Aceptar" }]
         )
     }
+
     const update = async () => {
         try {
             const data = {
@@ -42,12 +41,11 @@ const ProfileScreen = ({ navigation }: Props) => {
         }
     }
 
+    // efecto para volver a login si el usuario cerro sesión
     useEffect(()=>{
         if(!userId)
             navigation.navigate('LoginScreen')
     },[userId])
-
-
     
     return (
         <View style={{ flex: 1 }}>
@@ -63,7 +61,7 @@ const ProfileScreen = ({ navigation }: Props) => {
                 <View>
                     <Text style={stylesLocal.text}>Mail</Text>
                     <TextInput
-                        style={{ ...stylesLocal.input, color: 'black' }}
+                        style={{ ...stylesLocal.input, color: colors.primary }}
                         value={user?.mail}
                         placeholder="mail"
                         editable={false}
@@ -102,16 +100,24 @@ const ProfileScreen = ({ navigation }: Props) => {
                     <Button
                         title='Actualizar'
                         onPress={() => (update())}
-                        color='#02B1C8'
+                        color={colors.button}
                     />
                 </View>
                 <View style={{ ...styles.buttonFloatingMenu }}>
                     <TouchableOpacity>
                         <Icon name="menu-outline"
                             onPress={() => (navigation.toggleDrawer())}
-                            size={40} color="black" />
+                            size={40} color={colors.primary} />
                     </TouchableOpacity>
                 </View>
+                <View style={stylesLocal.buttonFloatingBack}>
+                    <TouchableOpacity>
+                        <Icon name="arrow-back-circle-outline"
+                            onPress={() => {navigation.navigate('SearchScreen') }}
+                            size={40} color={colors.primary} />
+                    </TouchableOpacity>
+                </View>
+
             </ScrollView>
         </View>
     );
@@ -125,14 +131,14 @@ const stylesLocal = StyleSheet.create({
         borderWidth: 3,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: 'white',
+        backgroundColor: colors.neutral,
         borderColor: '#af03b4',
         paddingVertical: 10,
         fontSize: 18,
         opacity: 0.9,
     },
     text: {
-        color: 'white',
+        color: colors.neutral,
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: 50,
@@ -159,5 +165,14 @@ const stylesLocal = StyleSheet.create({
         borderRadius: 15,
         marginTop: 20,
 
-    }
+    },
+    buttonFloatingBack: {
+        position: 'absolute',
+        top: 10,
+        left: 15,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: colors.neutral
+    },
 });

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Image, Text, Keyboard, View, StyleSheet, Button, Alert } from "react-native";
-import { styles } from "../themes/globalTheme";
+import { colors, styles } from "../themes/globalTheme";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
@@ -88,7 +88,7 @@ const stylesLocal = StyleSheet.create({
         borderWidth: 3,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: 'white',
+        backgroundColor: colors.neutral,
         borderColor: '#89C845',
         paddingVertical: 10,
         fontSize: 18,

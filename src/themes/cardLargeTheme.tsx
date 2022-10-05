@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './globalTheme';
 
 export const styles = StyleSheet.create({
     cardContainer: {
         marginHorizontal: 5,
-        backgroundColor: 'gray',
+        backgroundColor: colors.secondary,
         height: 140,
         width: 140,
         marginBottom: 20,
@@ -11,25 +12,24 @@ export const styles = StyleSheet.create({
     },
     cardContainerLarge: {
         marginHorizontal: 5,
-        backgroundColor: 'red',
         height: 140,
         marginBottom: 20,
         borderRadius: 10,
     },
     data: {
-        color: 'gray',
+        color: colors.secondary,
         fontSize: 24,
         fontWeight: 'bold',
         marginLeft:210,
     },
     subtitles:{
-        color: 'black',
+        color: colors.primary,
         fontSize: 24,
         fontWeight: 'bold',
         marginLeft:205,
     },
     id: {
-        color: 'black',
+        color: colors.primary,
         fontSize: 22,
         fontWeight: 'bold',
         position: 'absolute',
