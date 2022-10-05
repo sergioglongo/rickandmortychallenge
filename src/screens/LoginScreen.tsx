@@ -57,7 +57,6 @@ const LoginScreen = () => {
             <View style={stylesLocal.buttonLogin} >
                 <Button
                     title='Iniciar Sesión'
-                    // onPress={()=>navigation.navigate('HomeScreen')}
                     onPress={loginTry}
                     color='#02B1C8'
                 />

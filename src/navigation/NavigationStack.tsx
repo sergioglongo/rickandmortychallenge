@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext ,useEffect} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
+import SplashScreen from 'react-native-splash-screen'
 import SearchScreen from '../screens/SearchScreen';
 import { Characters } from '../interfaces/characterInterface';
 import CharacterScreen from '../screens/CharacterScreen';
@@ -11,7 +11,6 @@ import { LoadingScreen } from '../screens/LoadingScreen';
 // Argumentos que va a recibir cada Screen
 export type RootStackParams = {
   LoginScreen: undefined,
-  HomeScreen: undefined,
   SearchScreen: undefined,
   CharacterScreen: { character: Characters, color: string },
 }
@@ -21,7 +20,10 @@ const Stack = createStackNavigator<RootStackParams>();
 function NavigationStack() {
   const { status } = useContext(AuthContext);
   console.log("Estado al iniciar",status);
-  
+  useEffect(() => {
+    SplashScreen.hide()
+},[])
+
   if (status === 'checking') return <LoadingScreen />
 
   return (
@@ -40,7 +42,6 @@ function NavigationStack() {
           ) :
           (<>
             <Stack.Screen name="SearchScreen" component={SearchScreen} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
           </>)}
     </Stack.Navigator>

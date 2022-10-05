@@ -1,5 +1,6 @@
 import React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, View ,Image} from 'react-native'
+import { styles } from '../themes/globalTheme'
 
 export const LoadingScreen = () => {
     return (
@@ -8,6 +9,10 @@ export const LoadingScreen = () => {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
+                        <Image
+                source={require('../assets/rym_splash_screen.png')}
+                style={{...styles.imagebackgound,opacity:1}}
+            />
             <ActivityIndicator 
                 size={ 50 }
                 color="black"
