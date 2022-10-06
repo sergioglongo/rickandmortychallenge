@@ -7,15 +7,17 @@ import { Characters, CharactersPaginatedResponse } from '../interfaces/character
 export const getCharacterSearch = (name: string, status: string | null, gender: string | null) => {
 
     const [characters, setCharacters] = useState<Characters[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const loadCharacters = async () => {
         if (status === 'all' || status === null)
             status = ''
         if (gender === 'all' || gender === null)
             gender = ''
-        
+        setIsLoading(true)
         let totalPages: number = 0
         let charactersAll: Characters[] = []
+
         try {
             const characters = await axios.get<CharactersPaginatedResponse>(`https://rickandmortyapi.com/api/character/?name=${name}&status=${status}&gender=${gender}`)
                 .then(async resp => {
@@ -34,6 +36,7 @@ export const getCharacterSearch = (name: string, status: string | null, gender: 
                     setCharacters(charactersAll)
                 }
                 )
+            setIsLoading(false)
         }
         catch (error) {
             console.log('error:', error);
@@ -68,7 +71,7 @@ export const getCharacterSearch = (name: string, status: string | null, gender: 
     }, [])
     return {
         characters,
-        // isLoading,
+        isLoading,
         loadCharacters
     }
 }

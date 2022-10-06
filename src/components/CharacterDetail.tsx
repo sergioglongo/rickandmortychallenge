@@ -1,10 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { FlatList} from 'react-native-gesture-handler';
+import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { getEpisodes } from '../api/getEpisodes';
 import { Characters } from '../interfaces/characterInterface'
 import styles from '../themes/characterDetailTheme';
 import CharacterDetailHeader from './CharacterDetailHeader';
+
 
 interface Props {
     character: Characters

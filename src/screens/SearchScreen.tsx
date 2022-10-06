@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, Text, FlatList, Keyboard, StyleSheet, Dimensions } from 'react-native';
+import { Image, View, Text, FlatList, Keyboard, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import  styles from '../themes/searchScreeTheme';
-import  {styles as stylesGlobal} from '../themes/globalTheme';
+import  {colors, styles as stylesGlobal} from '../themes/globalTheme';
 
 import CharacterCard from '../components/CharacterCard';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -11,7 +11,7 @@ import CharacterCardLarge from '../components/CharacterCardLarge';
 import { getCharacterSearch } from '../api/getCharacterSearch';
 import ListEmpty from '../components/ListEmpty';
 import { useDebounce } from '../hooks/useDebounce';
-import ButtonFloatingMenu from '../components/buttonFloatingMenu';
+import ButtonFloatingMenu from '../components/ButtonFloatingMenu';
 import DropDownFilter from '../components/DropDownFilter';
 import { Data } from '../interfaces/dropDownInterface'
 
@@ -26,7 +26,7 @@ const SearchScreen = (props: Props) => {
     const [status, setStatus] = useState<string>('');
     const [gender, setGender] = useState<string>('');
     // llamados a funciones
-    const { characters, loadCharacters } = getCharacterSearch(searchState, status, gender)
+    const { characters, loadCharacters, isLoading} = getCharacterSearch(searchState, status, gender)
     const debounceValue = useDebounce(searchState, 1000)// debounce se ejecuta al cambiar searchState por ser un estado local
     // estado para determinar cantidad de columnas a mostrar, debe ser declarado despues del llamado a los personajes
     const [columns, setColumns] = useState(1)// cantidad de columnas a mostrar
@@ -97,6 +97,9 @@ const SearchScreen = (props: Props) => {
                     ListHeaderComponent={(
                         <View style={{ marginTop: 140 }}></View>
                     )}// espacio para bajar el header pudiendo ver cards en scroll
+                    ListFooterComponent={
+                        <ActivityIndicator style={{height:400}} size={50} color={colors.secondary} />
+                    }
                     ListEmptyComponent={<ListEmpty />}
                     renderItem={({ item }) => //elterna entre card de 1 columna o 2 columnas
                         columns === 2 ? <CharacterCard character={item} {...props} />

@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.neutral,
         borderBottomColor: colors.primary,
         borderBottomWidth: 0.5,
-        marginTop: 5,
+        marginTop: 3,
+        paddingBottom:3,
         width: 90,
     },
     shadow: {
